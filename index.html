@@ -1248,64 +1248,7 @@ table.hf-dataset tr:hover {
 <img src="./images/4.jpg" alt="Benchmark Visualization" style="width:80%; max-width:800px; height:auto; display:block; margin:20px auto;">
 
 <!--draw image-->
-<div id="kmeans-visualization" style="width: 800px; height: 600px; margin: 20px auto;">
-  <svg width="800" height="600"></svg>
-</div>
-<script>
-  // 假设你的数据格式如下，你需要根据实际数据进行调整
-  const data = [
-    { label: "gemma:2b", x: -2.5, y: 2.0, cluster: "Cluster 0" },
-    { label: "llama2:7b", x: -1.5, y: 1.5, cluster: "Cluster 1" },
-    { label: "qwen2.5:7b", x: -0.5, y: 1.0, cluster: "Cluster 2" },
-    { label: "hermes3:70b", x: 0.5, y: 0.5, cluster: "Cluster 3" },
-    { label: "tinyllama:1.1b", x: 1.5, y: 0.0, cluster: "Cluster 4" },
-    // 这里可以继续添加更多数据点
-  ];
 
-  const svg = d3.select('#kmeans-visualization svg');
-
-  // 定义比例尺
-  const xScale = d3.scaleLinear()
-     .domain([-5, 12.5])
-     .range([50, 750]);
-
-  const yScale = d3.scaleLinear()
-     .domain([-2, 2])
-     .range([550, 50]);
-
-  // 定义颜色比例尺
-  const colorScale = d3.scaleOrdinal()
-     .domain(["Cluster 0", "Cluster 1", "Cluster 2", "Cluster 3", "Cluster 4"])
-     .range(["blue", "orange", "green", "red", "purple"]);
-
-  // 绘制数据点
-  const points = svg.selectAll('circle')
-     .data(data)
-     .join('circle')
-     .attr('cx', d => xScale(d.x))
-     .attr('cy', d => yScale(d.y))
-     .attr('r', 5)
-     .attr('fill', d => colorScale(d.cluster))
-     .on('mouseover', function (event, d) {
-          // 鼠标悬停时放大显示数据值
-          d3.select(this)
-             .attr('r', 10);
-      })
-     .on('mouseout', function (event, d) {
-          // 鼠标移出时恢复原状
-          d3.select(this)
-             .attr('r', 5);
-      });
-
-  // 绘制标签（可选）
-  const labels = svg.selectAll('text')
-     .data(data)
-     .join('text')
-     .text(d => d.label)
-     .attr('x', d => xScale(d.x) + 5)
-     .attr('y', d => yScale(d.y))
-     .attr('font-size', '10px');
-</script>
 
 </section>
 
